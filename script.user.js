@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Infinite-craft quality of life
+// @name         Infinite-craft quality of life Scripts
 // @namespace    http://tampermonkey.net/
 // @version      2024-02-07
 // @description  try to take over the world!
