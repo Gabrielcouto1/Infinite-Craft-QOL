@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Infinite craft QOL test
+// @name         Infinite craft QOL 
 // @namespace    http://tampermonkey.net/
 // @version      2024-02-07
-// @description  try to take over the world!
+// @description  Infinite craft Quality of life scripts (includes Working search bar (if someone gets bugged), sorting elements alphabetically and recipes+discoveries list button)
 // @author       You
 // @match        http://neal.fun/infinite-craft
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
