@@ -3,9 +3,9 @@
 // @namespace    http://tampermonkey.net/
 // @version      2024-02-07
 // @description  try to take over the world!
-// @author       You
+// @author       Couto
 // @match        https://neal.fun/infinite-craft/
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
+// @icon         https://neal.fun/favicons/infinite-craft.png
 // @grant        unsafeWindow
 // @grant        GM_setValue
 // @grant        GM_getValue
@@ -15,93 +15,93 @@
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //ADDING ALPHABETICALLY SORTING BUTTON
-function aa(){
-  const sortElements= () => {
-    window.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements.sort((a, b) => (a.text > b.text) ? 1 : -1);
+function init() {
+  const sortElements = () => {
+      window.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements.sort((a, b) => (a.text > b.text) ? 1 : -1);
   }
 
-const buttonStyle = {
-    appearance: 'none',
-    position: 'absolute',
-    width: '80px',
-    height: '35px',
-    backgroundColor: '#1A1B31',
-    color: 'white',
-    fontWeight: 'bold',
-    fontFamily: 'Roboto,sans-serif',
-    border: '0',
-    outline: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    padding: 4,
-    left: '24px',
-    bottom: '24px',
-}
-
-function addButton() {
-    var button = document.createElement("button");
-    Object.keys(buttonStyle).forEach((attr) => {
-        button.style[attr] = buttonStyle[attr];
-    });
-
-    button.innerText = "Sort elements"
-    button.addEventListener('click', () => sortElements());
-
-    document.body.appendChild(button);
-  }
-addButton();
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// CREATES FUNCTION TO GET NOT WORKING ORIGINAL SEARCH INPUT
-function getElementByPlaceholder(placeholder) {
-  // Get all input elements in the document
-  const inputElements = document.querySelectorAll('input');
-
-  // Iterate through the input elements
-  for (const input of inputElements) {
-    // Check if the current input element has the specified placeholder
-    if (input.placeholder === placeholder) {
-      return input; // Return the element if found
-    }
+  const buttonStyle = {
+      appearance: 'none',
+      position: 'absolute',
+      width: '80px',
+      height: '35px',
+      backgroundColor: '#1A1B31',
+      color: 'white',
+      fontWeight: 'bold',
+      fontFamily: 'Roboto,sans-serif',
+      border: '0',
+      outline: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      padding: 4,
+      left: '24px',
+      bottom: '24px',
   }
 
-  return null; // Return null if no element with the specified placeholder is found
-}
+  function addButton() {
+      var button = document.createElement("button");
+      Object.keys(buttonStyle).forEach((attr) => {
+          button.style[attr] = buttonStyle[attr];
+      });
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      button.innerText = "Sort elements"
+      button.addEventListener('click', () => sortElements());
 
-// CREATES WORKING SEARCH BAR AND REPLACES WITH THE OLD ONE
-let items = () => [...document.querySelectorAll('.item:not(.instance)')]
-let show = (elt) => elt.style.display=''
-let hide = (elt) => elt.style.display='none'
-let search = (text) => (items().forEach(show), items().filter(e => !e.innerText.toLowerCase().includes(text.toLowerCase())).forEach(hide))
-let inputElt = document.createElement('input'); inputElt.type='text';
+      document.body.appendChild(button);
+  }
+  addButton();
 
-function handle(e) { search(e.target.value) }
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // CREATES FUNCTION TO GET NOT WORKING ORIGINAL SEARCH INPUT
+  function getElementByPlaceholder(placeholder) {
+      const inputElements = document.querySelectorAll('input');
 
-inputElt.style.webkitTextSizeAdjust = '100%';
-inputElt.style.webkitFontSmoothing = 'antialiased';
-inputElt.style.userSelect = 'none';
-inputElt.style.boxSizing = 'border-box';
-inputElt.style.margin = '0';
-inputElt.style.width = '100%';
-inputElt.style.fontSize = '16px';
-inputElt.style.border = 'none';
-inputElt.style.borderTop = '1px solid #c8c8c8';
-inputElt.style.outline = '0';
-inputElt.style.padding = '0 20px 0 40px';
-inputElt.style.height = '40px';
-inputElt.style.lineHeight = '18px';
-inputElt.style.position = 'relative';
-inputElt.style.background = 'url(/infinite-craft/search.svg) no-repeat 22px 22px';
-inputElt.style.backgroundSize = '21px 21px';
-inputElt.style.backgroundPosition = '10px 10px';
+      for (const input of inputElements) {
+          if (input.placeholder === placeholder) {
+              return input;
+          }
+      }
 
-inputElt.placeholder = "Search items.....";
+      return null;
+  }
 
-inputElt.addEventListener('input', handle);
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-getElementByPlaceholder("Search items...").replaceWith(inputElt);
+  // CREATES WORKING SEARCH BAR AND REPLACES WITH THE OLD ONE
+  let items = () => [...document.querySelectorAll('.item:not(.instance)')]
+  let show = (elt) => elt.style.display = ''
+  let hide = (elt) => elt.style.display = 'none'
+  let search = (text) => (items().forEach(show), items().filter(e => !e.innerText.toLowerCase().includes(text.toLowerCase())).forEach(hide))
+  let inputElt = document.createElement('input');
+  inputElt.type = 'text';
+
+  function handle(e) {
+      search(e.target.value)
+  }
+
+  inputElt.style.webkitTextSizeAdjust = '100%';
+  inputElt.style.webkitFontSmoothing = 'antialiased';
+  inputElt.style.userSelect = 'none';
+  inputElt.style.boxSizing = 'border-box';
+  inputElt.style.margin = '0';
+  inputElt.style.width = '100%';
+  inputElt.style.fontSize = '16px';
+  inputElt.style.border = 'none';
+  inputElt.style.borderTop = '1px solid #c8c8c8';
+  inputElt.style.outline = '0';
+  inputElt.style.padding = '0 20px 0 40px';
+  inputElt.style.height = '40px';
+  inputElt.style.lineHeight = '18px';
+  inputElt.style.position = 'relative';
+  inputElt.style.background = 'url(/infinite-craft/search.svg) no-repeat 22px 22px';
+  inputElt.style.backgroundSize = '21px 21px';
+  inputElt.style.backgroundPosition = '10px 10px';
+
+  inputElt.placeholder = "Search items.....";
+
+  inputElt.addEventListener('input', handle);
+
+  getElementByPlaceholder("Search items...").replaceWith(inputElt);
 
   // Create a button element
   var copyButton = document.createElement('button');
@@ -111,74 +111,89 @@ getElementByPlaceholder("Search items...").replaceWith(inputElt);
   copyButton.style.top = '10px';
   copyButton.style.left = '10px';
 
-  // Append the button to the document
   document.body.appendChild(copyButton);
 
-  // Add click event listener to the button
   copyButton.addEventListener('click', function() {
-      // Create a textarea element to hold the JSON
-      // Your existing code to get JSON
       var gameData = {
           discoveries: unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.discoveries,
           elements: unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements
       };
 
-      // Convert the JSON to a string
       var jsonString = JSON.stringify(gameData);
+
       var textarea = document.createElement('textarea');
       textarea.value = jsonString;
-
-      // Append the textarea to the document
       document.body.appendChild(textarea);
-
-      // Select the text in the textarea
       textarea.select();
-
-      // Copy the selected text to the clipboard
       document.execCommand('copy');
-
-      // Remove the temporary textarea from the document
       document.body.removeChild(textarea);
 
-      // Notify the user
-      alert('JSON copied to clipboard!');
+      var blob = new Blob([jsonString], {
+          type: 'application/json'
+      });
+
+      var downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'Infinite-craft-save.json';
+
+      document.body.appendChild(downloadLink);
+
+      downloadLink.click();
+
+      document.body.removeChild(downloadLink);
+
+      alert('JSON copied to clipboard and downloaded (infinite-craft-save.json)!');
   });
   var styleElement = document.createElement('style');
   styleElement.innerHTML = `
-      .btn {
-          font-family: Roboto, sans-serif;
-          font-weight: 600;
-          font-size: 12px;
-          color: #000000;
-          background: linear-gradient(90deg, #213cd9 0%, #ffffff 100%);
-          padding: 5px 20px;
-          border: solid #000000 2px;
-          box-shadow: rgb(0, 0, 0) 17px -9px 21px 4px;
-          border-radius: 37px;
-          transition: 645ms;
-          transform: translateY(0);
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          cursor: pointer;
-          margin-left: 250px;
-      }
-
-      .btn:hover {
-          transition: 645ms;
-          padding: 7px 22px;
-          transform: translateY(-5px);
-          background: linear-gradient(90deg, #213cd9 0%, #ffffff 100%);
-          color: #2b2e30;
-          border: solid 2px #0066cc;
-      }
+  .btn {
+    font-family: Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: #000000;
+    background: linear-gradient(90deg, #213cd9 0%, #ffffff 100%);
+    padding: 5px 20px;
+    border: solid #000000 2px;
+    box-shadow: rgb(0, 0, 0) 17px -9px 21px 4px;
+    border-radius: 37px;
+    transition: 645ms;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 250px;
+  }
+  
+  .btn:hover {
+    transition: 645ms;
+    padding: 7px 22px;
+    transform: translateY(-5px);
+    background: linear-gradient(90deg, #213cd9 0%, #ffffff 100%);
+    color: #2b2e30;
+    border: solid 2px #0066cc;
+  }
   `;
 
   document.head.appendChild(styleElement);
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  // Adrianmgg's code to add recipe list and discoveries list
-  const elhelper = (function() { /* via https://github.com/adrianmgg/elhelper */
-      function setup(elem, { style: { vars: styleVars = {}, ...style } = {}, attrs = {}, dataset = {}, events = {}, classList = [], children = [], parent = null, insertBefore = null, ...props }) {
+  // Adrianmgg's code to add recipe list and discoveries list (see full at https://github.com/adrianmgg/userscripts/tree/main/neal.fun/infinite_craft_combo_tracker)
+  const elhelper = (function() {
+      /* via https://github.com/adrianmgg/elhelper */
+      function setup(elem, {
+          style: {
+              vars: styleVars = {},
+              ...style
+          } = {},
+          attrs = {},
+          dataset = {},
+          events = {},
+          classList = [],
+          children = [],
+          parent = null,
+          insertBefore = null,
+          ...props
+      }) {
           for (const k in style) elem.style[k] = style[k];
           for (const k in styleVars) elem.style.setProperty(k, styleVars[k]);
           for (const k in attrs) elem.setAttribute(k, attrs[k]);
@@ -193,9 +208,19 @@ getElementByPlaceholder("Search items...").replaceWith(inputElt);
           }
           return elem;
       }
-      function create(tagName, options = {}) { return setup(document.createElement(tagName), options); }
-      function createNS(namespace, tagName, options = {}) { return setup(document.createElementNS(namespace, tagName), options); }
-      return {setup, create, createNS};
+
+      function create(tagName, options = {}) {
+          return setup(document.createElement(tagName), options);
+      }
+
+      function createNS(namespace, tagName, options = {}) {
+          return setup(document.createElementNS(namespace, tagName), options);
+      }
+      return {
+          setup,
+          create,
+          createNS
+      };
   })();
 
   class GMValue {
@@ -220,10 +245,10 @@ getElementByPlaceholder("Search items...").replaceWith(inputElt);
   function saveCombo(lhs, rhs, result) {
       console.log(`crafted ${lhs} + ${rhs} -> ${result}`);
       const data = getCombos();
-      if(!(result in data)) data[result] = [];
+      if (!(result in data)) data[result] = [];
       const sortedLhsRhs = sortRecipeIngredients([lhs, rhs]);
-      for(const existingPair of data[result]) {
-          if(sortedLhsRhs[0] === existingPair[0] && sortedLhsRhs[1] === existingPair[1]) return;
+      for (const existingPair of data[result]) {
+          if (sortedLhsRhs[0] === existingPair[0] && sortedLhsRhs[1] === existingPair[1]) return;
       }
       const pair = [lhs, rhs];
       pair.sort();
@@ -238,37 +263,38 @@ getElementByPlaceholder("Search items...").replaceWith(inputElt);
       //  that order doesn't need to be the same as the one the site uses
       return components.sort();
   }
+
   function getCombos() {
       const data = VAL_COMBOS.get();
       const dataVersion = VAL_DATA_VERSION.get();
-      if(dataVersion > GM_DATAVERSION_LATEST) {
+      if (dataVersion > GM_DATAVERSION_LATEST) {
           // uh oh
           // not gonna even try to handle this case, just toss up an error alert
           const msg = `infinite craft tweaks userscript's internal save data was marked as version ${dataVersion}, but the highest expected version was ${GM_DATAVERSION_LATEST}.
-if you've downgraded the userscript or copied save data from someone else, update the userscript and try again. otherwise, please file a bug report at https://github.amgg.gg/userscripts/issues`;
+    if you've downgraded the userscript or copied save data from someone else, update the userscript and try again. otherwise, please file a bug report at https://github.amgg.gg/userscripts/issues`;
           alert(msg);
           throw new Error(msg);
       }
-      if(dataVersion < GM_DATAVERSION_LATEST) {
+      if (dataVersion < GM_DATAVERSION_LATEST) {
           // confirm that user wants to update save data
           const updateConfirm = confirm(`infinite craft tweaks userscript's internal save data is from an earlier version, and needs to be upgraded. (if you select cancel, userscript will be non-functional, so this choice is mostly for if you want to take a moment to manually back up the data just in case.)
-
-proceed with upgrading save data?`);
-          if(!updateConfirm) {
+    
+    proceed with upgrading save data?`);
+          if (!updateConfirm) {
               throw new Error('user chose not to update save data');
           }
           // upgrade the data
-          if(dataVersion <= 0) {
+          if (dataVersion <= 0) {
               // recipes in this version weren't sorted, and may contain duplicates once sorting has been applied
-              for(const result in data) {
+              for (const result in data) {
                   // sort the recipes (just do it in place, since we're not gonna use the old data again
-                  for(const recipe of data[result]) {
+                  for (const recipe of data[result]) {
                       sortRecipeIngredients(recipe);
                   }
                   // build new list with just the ones that remain not duplicate
                   const newRecipesList = [];
-                  for(const recipe of data[result]) {
-                      if(!(newRecipesList.some(r => recipe[0] === r[0] && recipe[1] === r[1]))) {
+                  for (const recipe of data[result]) {
+                      if (!(newRecipesList.some(r => recipe[0] === r[0] && recipe[1] === r[1]))) {
                           newRecipesList.push(recipe);
                       }
                   }
@@ -283,6 +309,7 @@ proceed with upgrading save data?`);
       // the data is definitely current now
       return data;
   }
+
   function main() {
       const _getCraftResponse = icMain.getCraftResponse;
       const _selectElement = icMain.selectElement;
@@ -295,13 +322,13 @@ proceed with upgrading save data?`);
 
       // random element thing
       document.documentElement.addEventListener('mousedown', e => {
-          if(e.buttons === 1 && e.altKey && !e.shiftKey) { // left mouse + alt
+          if (e.buttons === 1 && e.altKey && !e.shiftKey) { // left mouse + alt
               e.preventDefault();
               e.stopPropagation();
               const elements = icMain._data.elements;
               const randomElement = elements[Math.floor(Math.random() * elements.length)];
               _selectElement(e, randomElement);
-          } else if(e.buttons === 1 && !e.altKey && e.shiftKey) { // lmb + shift
+          } else if (e.buttons === 1 && !e.altKey && e.shiftKey) { // lmb + shift
               e.preventDefault();
               e.stopPropagation();
               const instances = icMain._data.instances;
@@ -309,7 +336,9 @@ proceed with upgrading save data?`);
               const lastInstanceElement = icMain._data.elements.filter(e => e.text === lastInstance.text)[0];
               _selectElement(e, lastInstanceElement);
           }
-      }, {capture: false});
+      }, {
+          capture: false
+      });
 
       // special search handlers
       const searchHandlers = {
@@ -331,14 +360,14 @@ proceed with upgrading save data?`);
       };
       const _sortedElements__get = icMain?._computedWatchers?.sortedElements?.getter;
       // if that wasn't where we expected it to be, don't try to patch it
-      if(_sortedElements__get !== null && _sortedElements__get !== undefined) {
+      if (_sortedElements__get !== null && _sortedElements__get !== undefined) {
           icMain._computedWatchers.sortedElements.getter = function() {
-              for(const handlerPrefix in searchHandlers) {
-                  if(this.searchQuery && this.searchQuery.startsWith(handlerPrefix)) {
+              for (const handlerPrefix in searchHandlers) {
+                  if (this.searchQuery && this.searchQuery.startsWith(handlerPrefix)) {
                       try {
                           const filter = searchHandlers[handlerPrefix](this.searchQuery.substr(handlerPrefix.length));
                           return this.elements.filter(filter);
-                      } catch(err) {
+                      } catch (err) {
                           console.error(`error during search handler '${handlerPrefix}'`, err);
                           return [];
                       }
@@ -355,11 +384,15 @@ proceed with upgrading save data?`);
       function mkElementItem(element) {
           return elhelper.create('div', {
               classList: ['item'],
-              dataset: {[cssScopeDatasetThing]: ''},
+              dataset: {
+                  [cssScopeDatasetThing]: ''
+              },
               children: [
                   elhelper.create('span', {
                       classList: ['item-emoji'],
-                      dataset: {[cssScopeDatasetThing]: ''},
+                      dataset: {
+                          [cssScopeDatasetThing]: ''
+                      },
                       textContent: element.emoji,
                       style: {
                           pointerEvents: 'none',
@@ -371,15 +404,15 @@ proceed with upgrading save data?`);
       }
 
       /* this will call genFn and iterate all the way through it,
-         but taking a break every chunkSize iterations to allow rendering and stuff to happen.
-         returns a promise. */
+      but taking a break every chunkSize iterations to allow rendering and stuff to happen.
+      returns a promise. */
       function nonBlockingChunked(chunkSize, genFn, timeout = 0) {
           return new Promise((resolve, reject) => {
               const gen = genFn();
               (function doChunk() {
-                  for(let i = 0; i < chunkSize; i++) {
+                  for (let i = 0; i < chunkSize; i++) {
                       const next = gen.next();
-                      if(next.done) {
+                      if (next.done) {
                           resolve();
                           return;
                       }
@@ -390,10 +423,10 @@ proceed with upgrading save data?`);
       }
 
       // recipes popup
-      const recipesListContainer = elhelper.create('div', {
-      });
+      const recipesListContainer = elhelper.create('div', {});
+
       function clearRecipesDialog() {
-          while(recipesListContainer.firstChild !== null) recipesListContainer.removeChild(recipesListContainer.firstChild);
+          while (recipesListContainer.firstChild !== null) recipesListContainer.removeChild(recipesListContainer.firstChild);
       }
       const recipesDialog = elhelper.create('dialog', {
           parent: document.body,
@@ -424,12 +457,14 @@ proceed with upgrading save data?`);
           //  as a lazy fix for the bug we'd otherwise have where opening a menu, quickly closing it, then opening it again
           //  would lead to the old menu's task still adding stuff to the new menu.
           //  (this doesn't actually stop any unnecessary work, but it at least prevents the possible visual bugs)
-          const container = elhelper.create('div', {parent: recipesListContainer});
+          const container = elhelper.create('div', {
+              parent: recipesListContainer
+          });
           // show the dialog
           recipesDialog.showModal();
           // populate the dialog
           await nonBlockingChunked(512, function*() {
-              for(const child of childGenerator()) {
+              for (const child of childGenerator()) {
                   container.appendChild(child);
                   yield;
               }
@@ -454,44 +489,58 @@ proceed with upgrading save data?`);
           // build a name -> element map
           const byName = {};
           const byNameLower = {}; // for fallback stuff
-          for(const element of icMain._data.elements) {
+          for (const element of icMain._data.elements) {
               byName[element.text] = element;
               byNameLower[element.text.toLowerCase()] = element;
           }
+
           function getByName(name) {
               // first, try grabbing it by its exact name
               const fromNormal = byName[name];
-              if(fromNormal !== undefined) {
+              if (fromNormal !== undefined) {
                   return byName[name];
               }
               // if that doesn't do it, try that but ignoring case.
               //  i think it doesn't accept new elements if they're case-insensitive equal to an element the user already has? or something like that at least
               const fromLower = byNameLower[name.toLowerCase()];
-              if(fromLower !== undefined) {
+              if (fromLower !== undefined) {
                   return fromLower;
               }
               // worst case, we have neither
-              return {emoji: "❌", text: `[userscript encountered an error trying to look up element '${name}']`};
+              return {
+                  emoji: "❌",
+                  text: `[userscript encountered an error trying to look up element '${name}']`
+              };
           }
           const combos = getCombos();
+
           function listItemClick(evt) {
               const elementName = evt.target.dataset.comboviewerElement;
-              document.querySelector(`[data-comboviewer-section="${CSS.escape(elementName)}"]`).scrollIntoView({block: 'nearest'});
-          }
-          function mkLinkedElementItem(element) {
-              return elhelper.setup(mkElementItem(element), {
-                  events: { click: listItemClick },
-                  dataset: { comboviewerElement: element.text },
+              document.querySelector(`[data-comboviewer-section="${CSS.escape(elementName)}"]`).scrollIntoView({
+                  block: 'nearest'
               });
           }
-          openRecipesDialog(function*(){
-              for(const comboResult in combos) {
-                  if(comboResult === 'Nothing') continue;
+
+          function mkLinkedElementItem(element) {
+              return elhelper.setup(mkElementItem(element), {
+                  events: {
+                      click: listItemClick
+                  },
+                  dataset: {
+                      comboviewerElement: element.text
+                  },
+              });
+          }
+          openRecipesDialog(function*() {
+              for (const comboResult in combos) {
+                  if (comboResult === 'Nothing') continue;
                   // anchor for jumping to
                   yield elhelper.create('div', {
-                      dataset: { comboviewerSection: comboResult },
+                      dataset: {
+                          comboviewerSection: comboResult
+                      },
                   });
-                  for(const [lhs, rhs] of combos[comboResult]) {
+                  for (const [lhs, rhs] of combos[comboResult]) {
                       yield elhelper.create('div', {
                           children: [
                               mkLinkedElementItem(getByName(comboResult)),
@@ -509,8 +558,8 @@ proceed with upgrading save data?`);
       // first discoveries list (just gonna hijack the recipes popup for simplicity)
       addControlsButton('discoveries', () => {
           openRecipesDialog(function*() {
-              for(const element of icMain._data.elements) {
-                  if(element.discovered) {
+              for (const element of icMain._data.elements) {
+                  if (element.discovered) {
                       yield mkElementItem(element);
                   }
               }
@@ -540,7 +589,7 @@ proceed with upgrading save data?`);
               parent: pinnedCombos,
               events: {
                   mousedown: (e) => {
-                      if(e.buttons === 4 || (e.buttons === 1 && e.altKey && !e.shiftKey)) {
+                      if (e.buttons === 4 || (e.buttons === 1 && e.altKey && !e.shiftKey)) {
                           pinnedCombos.removeChild(elementElement);
                           const pins = VAL_PINNED_ELEMENTS.get();
                           VAL_PINNED_ELEMENTS.set(pins.filter(p => p !== txt));
@@ -554,14 +603,14 @@ proceed with upgrading save data?`);
       // does save it to pins list also
       function addPinnedElement(element) {
           const pins = VAL_PINNED_ELEMENTS.get();
-          if(!(pins.some(p => p === element.text))) { // no duplicates
+          if (!(pins.some(p => p === element.text))) { // no duplicates
               addPinnedElementInternal(element);
               pins.push(element.text);
               VAL_PINNED_ELEMENTS.set(pins);
           }
       }
       icMain.selectElement = function(mouseEvent, element) {
-          if(mouseEvent.buttons === 4 || (mouseEvent.buttons === 1 && mouseEvent.altKey && !mouseEvent.shiftKey)) {
+          if (mouseEvent.buttons === 4 || (mouseEvent.buttons === 1 && mouseEvent.altKey && !mouseEvent.shiftKey)) {
               // this won't actually stop it since what gets passed into this is a mousedown event
               mouseEvent.preventDefault();
               mouseEvent.stopPropagation();
@@ -572,11 +621,14 @@ proceed with upgrading save data?`);
       };
       icMain.selectInstance = function(mouseEvent, instance) {
           // specifically don't do alt-lmb alias for instances, since it ends up being accidentally set off a bunch by the alt-drag random element feature
-          if(mouseEvent.buttons === 4) {
+          if (mouseEvent.buttons === 4) {
               // this won't actually stop it since what gets passed into this is a mousedown event
               mouseEvent.preventDefault();
               mouseEvent.stopPropagation();
-              addPinnedElement({text: instance.text, emoji: instance.emoji});
+              addPinnedElement({
+                  text: instance.text,
+                  emoji: instance.emoji
+              });
               return;
           }
           return _selectInstance.apply(this, arguments);
@@ -584,9 +636,9 @@ proceed with upgrading save data?`);
       // load initial pinned elements
       (() => {
           const existingPins = VAL_PINNED_ELEMENTS.get();
-          for(const pin of existingPins) {
+          for (const pin of existingPins) {
               const pinElement = icMain._data.elements.find(e => e.text === pin);
-              if(pinElement !== undefined) {
+              if (pinElement !== undefined) {
                   addPinnedElementInternal(pinElement);
               }
           }
@@ -598,11 +650,11 @@ proceed with upgrading save data?`);
   // need to wait for stuff to be actually initialized.
   //  might be an actual thing we can hook into to detect that
   //  but for now just waiting until the function we want exists works well enough
-  (function waitForReady(){
+  (function waitForReady() {
       icMain = unsafeWindow?.$nuxt?._route?.matched?.[0]?.instances?.default;
-      if(icMain !== undefined && icMain !== null) main();
+      if (icMain !== undefined && icMain !== null) main();
       else setTimeout(waitForReady, 10);
   })();
 }
 
-aa();
+init();
