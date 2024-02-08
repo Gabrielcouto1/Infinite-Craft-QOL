@@ -2,7 +2,7 @@
 // @name         Infinite craft QOL 
 // @namespace    http://tampermonkey.net/
 // @version      2024-02-07
-// @description  Infinite craft Quality of life scripts (includes Working search bar (if someone gets bugged), sorting elements alphabetically and recipes+discoveries list button)
+// @description  Infinite craft Quality of life scripts 
 // @author       You
 // @match        http://neal.fun/infinite-craft
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
