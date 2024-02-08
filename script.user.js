@@ -444,4 +444,3 @@ function replaceSearchBar(){
 // Calling previously declared functions
 createSortButton();
 replaceSearchBar();
-createRecipesDiscoreriesListButtons();
