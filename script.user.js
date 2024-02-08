@@ -433,7 +433,7 @@ function createRecipesDiscoreriesListButtons(){
         //  might be an actual thing we can hook into to detect that
         //  but for now just waiting until the function we want exists works well enough
         (function waitForReady(){
-            icMain = unsafeWindow?.$nuxt?._route?.matched?.[0]?.instances?.default;
+            icMain = Window?.$nuxt?._route?.matched?.[0]?.instances?.default;
             if(icMain !== undefined && icMain !== null) main();
             else setTimeout(waitForReady, 10);
         })();
