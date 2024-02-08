@@ -16,15 +16,37 @@
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //ADDING ALPHABETICALLY SORTING BUTTON
 function init() {
-	const sortElements = () => {
-		window.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements.sort((a, b) => (a.text > b.text) ? 1 : -1);
+	function customShuffle(array) {
+		let shuffledArray = [];
+		console.log(array);
+		while (array.length > 0) {
+			const randomIndex = Math.floor(Math.random() * array.length);
+			const removedElement = array.splice(randomIndex, 1)[0];
+			shuffledArray.push(removedElement);
+		}
+
+		console.log(shuffledArray);
+		array = shuffledArray;
 	}
+
+	const sortElements = (order) => {
+
+		let elements = unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements;
+
+		if (order === 'alphabetical') {
+			elements.sort((a, b) => (a.text > b.text) ? 1 : -1);
+		} else if (order === 'random') {
+			customShuffle(elements);
+			console.log(elements);
+			console.log(unsafeWindow.$nuxt.$root.$children[2].$children[0].$children[0]._data.elements);
+		}
+	};
 
 	const buttonStyle = {
 		appearance: 'none',
 		position: 'absolute',
-		width: '80px',
-		height: '35px',
+		width: '100px',
+		height: '55px',
 		backgroundColor: '#1A1B31',
 		color: 'white',
 		fontWeight: 'bold',
@@ -36,20 +58,29 @@ function init() {
 		padding: 4,
 		left: '24px',
 		bottom: '24px',
-	}
+	};
 
-	function addButton() {
+	function addButton(text, clickHandler) {
 		var button = document.createElement("button");
 		Object.keys(buttonStyle).forEach((attr) => {
 			button.style[attr] = buttonStyle[attr];
 		});
-
-		button.innerText = "Sort elements"
-		button.addEventListener('click', () => sortElements());
+		if (text == "Sort randomly") {
+			button.style.marginLeft = '130px';
+		}
+		button.innerText = text;
+		button.addEventListener('click', clickHandler);
 
 		document.body.appendChild(button);
 	}
-	addButton();
+
+	function addButtons() {
+		addButton("Sort alphabetically", () => sortElements('alphabetical'));
+		addButton("Sort randomly", () => sortElements('random'));
+	}
+
+	addButtons();
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// CREATES FUNCTION TO GET NOT WORKING ORIGINAL SEARCH INPUT
@@ -206,7 +237,7 @@ function init() {
 	importButton.style.flexDirection = 'row';
 	importButton.style.alignItems = 'center';
 	importButton.style.marginLeft = '550px'
-    importButton.style.marginTop = '10px';
+	importButton.style.marginTop = '10px';
 	importButton.style.cursor = 'pointer';
 
 	importButton.addEventListener('mouseenter', function() {
@@ -747,4 +778,4 @@ function init() {
 	})();
 }
 
-setTimeout(init,500);
+setTimeout(init, 500);
